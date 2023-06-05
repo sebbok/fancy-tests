@@ -217,14 +217,18 @@ public class FancyRTCMediaDevices: NSObject {
     @available(iOS 11.0, *)
     static func doStartRecording(recorder: RPScreenRecorder, factory: RTCPeerConnectionFactory, localStream: RTCMediaStream, listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()) {
         listener(nil,"-----------doStartRecording")
+         listener(nil,"-----------doStartRecording1")
          let recorder = RPScreenRecorder.shared()
                 if (recorder.isRecording) {
+                 listener(nil,"-----------doStartRecording2")
                     recorder.stopCapture { (error) in
                         if(error != nil){
                             print(error!.localizedDescription)
                         }
                     }
                 }
+                 listener(nil,"-----------doStartRecording3")
+
 //         if (recorder.isAvailable) {
 //             let videoSource = factory.videoSource()
 //             let videoTrack = factory.videoTrack(with: videoSource, trackId: UUID().uuidString)
