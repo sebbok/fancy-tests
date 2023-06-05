@@ -45,7 +45,7 @@ public class FancyRTCMediaDevices: NSObject {
         let factory = FancyRTCPeerConnection.factory
 
 
-                    print("getDisplayMedia", error!.localizedDescription)
+                    print("-----------------getDisplayMedia")
 
                     listener(nil,"----------Screen recorder is not available!")
         
