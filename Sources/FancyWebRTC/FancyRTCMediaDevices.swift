@@ -43,6 +43,11 @@ public class FancyRTCMediaDevices: NSObject {
     @objc public static func getUserMedia(constraints:FancyRTCMediaStreamConstraints,
                                           listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
         let factory = FancyRTCPeerConnection.factory
+
+
+                    print("getDisplayMedia", error!.localizedDescription)
+
+                    listener(nil,"----------Screen recorder is not available!")
         
         let localStream = factory.mediaStream(withStreamId: UUID().uuidString)
         
