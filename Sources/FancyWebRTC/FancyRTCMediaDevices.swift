@@ -202,7 +202,7 @@ public class FancyRTCMediaDevices: NSObject {
     }
     
     @available(iOS 11.0, *)
-    static func stopDisplayMedia(){
+      static func stopDisplayMedia(listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?)){
         let recorder = RPScreenRecorder.shared()
         if (recorder.isRecording) {
             recorder.stopCapture { (error) in
