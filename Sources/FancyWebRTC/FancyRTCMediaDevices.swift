@@ -280,8 +280,7 @@ public class FancyRTCMediaDevices: NSObject {
             if(recorder.isRecording){
                 recorder.stopCapture { (error) in
                     if(error == nil){
-                     listener(nil,"-----------------call stopDisplayMedia")
-//                         doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
+                        doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
                     }else{
                         print("getDisplayMedia", error!.localizedDescription)
                     }
