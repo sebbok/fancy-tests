@@ -209,6 +209,7 @@ public class FancyRTCMediaDevices: NSObject {
                 if(error != nil){
                     print(error!.localizedDescription)
                 }
+                      listener(nil,"-----------------stopDisplayMedia")
             }
         }
     }
