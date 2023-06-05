@@ -202,16 +202,13 @@ public class FancyRTCMediaDevices: NSObject {
     }
     
     @available(iOS 11.0, *)
-      static func stopDisplayMedia(constraints:FancyRTCMediaStreamConstraints,
-                                                                            listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
-         listener(nil,"-----------------call stopDisplayMedia")
+    static func stopDisplayMedia(){
         let recorder = RPScreenRecorder.shared()
         if (recorder.isRecording) {
             recorder.stopCapture { (error) in
                 if(error != nil){
                     print(error!.localizedDescription)
                 }
-
             }
         }
     }
@@ -219,6 +216,7 @@ public class FancyRTCMediaDevices: NSObject {
     
     @available(iOS 11.0, *)
     static func doStartRecording(recorder: RPScreenRecorder, factory: RTCPeerConnectionFactory, localStream: RTCMediaStream, listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()) {
+        listener(nil,"-----------doStartRecording")
         if (recorder.isAvailable) {
             let videoSource = factory.videoSource()
             let videoTrack = factory.videoTrack(with: videoSource, trackId: UUID().uuidString)
@@ -280,6 +278,7 @@ public class FancyRTCMediaDevices: NSObject {
             if(recorder.isRecording){
                 recorder.stopCapture { (error) in
                     if(error == nil){
+                     listener(nil,"-----------if(recorder.isRecording)")
                         doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
                     }else{
                         print("getDisplayMedia", error!.localizedDescription)
@@ -287,6 +286,7 @@ public class FancyRTCMediaDevices: NSObject {
                 }
             }else if(recorder.isAvailable){
                 doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
+                  listener(nil,"-----------if recorder.isAvailable")
             }else{
                 listener(nil,"Screen recorder is not available!")
                 return
