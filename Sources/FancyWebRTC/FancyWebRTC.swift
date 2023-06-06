@@ -652,11 +652,10 @@ public class MediaData: NSObject {
     
     
     public func switchCamera(trackId: String) {
-    stop()
-//         let mediaData = tracks[trackId];
-//         if (mediaData != nil && mediaData!.capturer != nil) {
-//             mediaData?.capturer?.toggleCamera();
-//         }
+        let mediaData = tracks[trackId];
+        if (mediaData != nil && mediaData!.capturer != nil) {
+            mediaData?.capturer?.toggleCamera();
+        }
     }
     
     private func registerDataChannelDelegate(name: String) {
@@ -981,6 +980,6 @@ public class WebRTCCapturer: NSObject {
             cameraPosition = "front";
         }
         stop()
-        startWithError(show: true)
+//         startWithError(show: true)
     }
 }
