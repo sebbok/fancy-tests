@@ -669,7 +669,7 @@ public class MediaData: NSObject {
         return NSUUID().uuidString;
     }
     
-    private func getUserRRRRRRRMedia(quality: Quality, callback:@escaping (RTCMediaStream?, String?) -> Void) {
+    private func getUserMedia(quality: Quality, callback:@escaping (RTCMediaStream?, String?) -> Void) {
         let factory = connectionFactory!;
         let streamId = getRandomId();
         let localStream = factory.mediaStream(withStreamId: streamId)
@@ -980,6 +980,6 @@ public class WebRTCCapturer: NSObject {
             cameraPosition = "front";
         }
         stop()
-//         startWithError(show: true)
+        startWithError(show: true)
     }
 }
