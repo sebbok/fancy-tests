@@ -1,390 +1,390 @@
-// //
-// //  FancyWebRTC.swift
-// //  FancyWebRTC
-// //
-// //  Created by Osei Fortune on 1/19/19.
-// //  Copyright © 2019 Osei Fortune. All rights reserved.
-// //
 //
-// import Foundation
-// import AVFoundation
-// import WebRTC
+//  FancyWebRTC.swift
+//  FancyWebRTC
 //
-// @objcMembers public class AVCaptureState: NSObject {
-//     public static func isVideoDisabled() -> Bool {
-//         let status = AVCaptureDevice.authorizationStatus(
-//             for: AVMediaType.video
-//         );
-//         return (
-//             status == AVAuthorizationStatus.denied ||
-//                 status == AVAuthorizationStatus.restricted
-//         );
-//     }
+//  Created by Osei Fortune on 1/19/19.
+//  Copyright © 2019 Osei Fortune. All rights reserved.
 //
-//     public static func isAudioDisabled() -> Bool {
-//         let status = AVCaptureDevice.authorizationStatus(
-//             for: AVMediaType.video
-//         );
-//         return (
-//             status == AVAuthorizationStatus.denied ||
-//                 status == AVAuthorizationStatus.restricted
-//         );
-//     }
-// }
-//
-//
-//
-//
-//
-// @objc public enum Quality: Int {
-//     case MAX_480P
-//     case MAX_720P
-//     case MAX_1080P
-//     case MAX_2160P
-//     case HIGHEST
-//     case LOWEST
-// }
-//
-// @objc public enum WebRTCDataChannelMessageType: Int, RawRepresentable {
-//     case BINARY
-//     case TEXT
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .BINARY:
-//             return "binary"
-//         case .TEXT:
-//             return "text"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "binary":
-//             self = .BINARY
-//         case "text":
-//             self = .TEXT
-//         default:
-//             self = .TEXT
-//
-//         }
-//     }
-// }
-//
-// @objc public protocol WebRTCIceCandidate {
-//     var sdpMid: String {get set}
-//     var  sdpMLineIndex: Int {get set}
-//     var  sdp: String {get set}
-// }
-//
-// @objc  public protocol WebRTCSdp {
-//     var type: WebRTCSdpType {get set}
-//     var sdp: String {get set}
-// }
-//
-//
-// @objc public enum SignalingState: Int, RawRepresentable {
-//     case STABLE
-//     case HAVE_LOCAL_OFFER
-//     case HAVE_LOCAL_PRANSWER
-//     case HAVE_REMOTE_OFFER
-//     case HAVE_REMOTE_PRANSWER
-//     case CLOSED
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .STABLE:
-//             return "stable"
-//         case .HAVE_LOCAL_OFFER:
-//             return "have-local-offer"
-//         case .HAVE_LOCAL_PRANSWER:
-//             return "have-local-pranswer"
-//         case .HAVE_REMOTE_OFFER:
-//             return "have-remote-offer"
-//         case .HAVE_REMOTE_PRANSWER:
-//             return "have-remote-pranswer"
-//         case .CLOSED:
-//             return "closed"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "stable":
-//             self = .STABLE
-//         case "have-local-offer":
-//             self = .HAVE_LOCAL_OFFER
-//         case "have-local-pranswer":
-//             self = .HAVE_LOCAL_PRANSWER
-//         case "have-remote-offer":
-//             self = .HAVE_REMOTE_OFFER
-//         case "have-remote-pranswer":
-//             self = .HAVE_REMOTE_PRANSWER
-//         case "closed":
-//             self = .CLOSED
-//         default:
-//             self = .STABLE
-//         }
-//     }
-// }
-//
-// @objc public enum IceGatheringState: Int, RawRepresentable {
-//     case NEW
-//     case GATHERING
-//     case COMPLETE
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .NEW:
-//             return "binary"
-//         case .GATHERING:
-//             return "text"
-//         case .COMPLETE:
-//             return "complete"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "new":
-//             self = .NEW
-//         case "gathering":
-//             self = .GATHERING
-//         case "complete":
-//             self = .COMPLETE
-//         default:
-//             self = .COMPLETE
-//
-//         }
-//     }
-// }
-//
-// @objc public enum IceConnectionState: Int, RawRepresentable {
-//     case NEW
-//     case CHECKING
-//     case CONNECTED
-//     case COMPLETED
-//     case FAILED
-//     case DISCONNECTED
-//     case CLOSED
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .NEW:
-//             return "new"
-//         case .CHECKING:
-//             return "checking"
-//         case .CONNECTED:
-//             return "connected"
-//         case .COMPLETED:
-//             return "completed"
-//         case .FAILED:
-//             return "failed"
-//         case .DISCONNECTED:
-//             return "disconnected"
-//         case .CLOSED:
-//             return "closed"
-//         default:
-//             return "new"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "new":
-//             self = .NEW
-//         case "checking":
-//             self = .CHECKING
-//         case "connected":
-//             self = .CONNECTED
-//         case "completed":
-//             self = .COMPLETED
-//         case "failed":
-//             self = .FAILED
-//         case "disconnected":
-//             self = .DISCONNECTED
-//         case "closed":
-//             self = .CLOSED
-//         default:
-//             self = .NEW
-//         }
-//     }
-// }
-//
-// @objc public enum WebRTCDataChannelState: Int, RawRepresentable {
-//     case CONNECTING
-//     case CLOSED
-//     case CLOSING
-//     case OPEN
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .CONNECTING:
-//             return "connecting"
-//         case .CLOSED:
-//             return "closed"
-//         case .CLOSING:
-//             return "closing"
-//         case .OPEN:
-//             return "open"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "connecting":
-//             self = .CONNECTING
-//         case "closed":
-//             self = .CLOSED
-//         case "closing":
-//             self = .CLOSING
-//         case "open":
-//             self = .OPEN
-//         default:
-//             self = .CLOSED
-//
-//         }
-//     }
-// }
-//
-// @objcMembers public class IceServer: NSObject {
-//     var username: String?
-//     var password: String?
-//     var urls: NSArray?
-//     override init() {
-//
-//     }
-//     public init(urls: NSArray, username: String?, password: String?) {
-//         self.urls = urls
-//         self.username = username
-//         self.password = password
-//     }
-// }
-//
-// @objc public protocol WebRTCOptions {
-//     var iceServers: Array<IceServer> {get set}
-//     var enableVideo: Bool {get set}
-//     var enableAudio: Bool {get set}
-// }
-//
-// @objc public enum WebRTCState: Int {
-//     case CONNECTING
-//     case DISCONNECTED
-//     case CONNECTED
-// }
-//
-// @objc public enum WebRTCSdpType: Int, RawRepresentable {
-//     case OFFER
-//     case PRANSWER
-//     case ANSWER
-//     public typealias RawValue = String
-//     public var rawValue: RawValue {
-//         switch self {
-//         case .OFFER:
-//             return "offer"
-//         case .PRANSWER:
-//             return "prAnswer"
-//         case .ANSWER:
-//             return "answer"
-//         }
-//     }
-//     public init?(rawValue: RawValue) {
-//         switch rawValue {
-//         case "offer":
-//             self = .OFFER
-//         case "prAnswer":
-//             self = .PRANSWER
-//         case "answer":
-//             self = .ANSWER
-//         default:
-//             self = .OFFER
-//
-//         }
-//     }
-// }
-//
-//
-// @objc public protocol FancyWebRTCClientDelegate {
-//     func webRTCClientOnRemoveStream(client: FancyWebRTC, stream: RTCMediaStream)
-//     func webRTCClientDataChannelStateChanged(
-//         client: FancyWebRTC,
-//         name: String,
-//         type: Any
-//     )
-//     func webRTCClientDataChannelMessageType(
-//         client: FancyWebRTC,
-//         name: String,
-//         data: String,
-//         type: WebRTCDataChannelMessageType
-//     )
-//     func webRTCClientStartCallWithSdp(client: FancyWebRTC, sdp: RTCSessionDescription)
-//
-//     func webRTCClientDidReceiveStream(
-//         client: FancyWebRTC,
-//         stream: RTCMediaStream
-//     )
-//
-//     func webRTCClientDidRemoveStream(
-//         client: FancyWebRTC,
-//         stream: RTCMediaStream
-//     )
-//
-//     func webRTCClientDidReceiveError(client: FancyWebRTC, error: NSError)
-//
-//
-//     func webRTCClientOnRenegotiationNeeded(
-//         client: FancyWebRTC
-//     )
-//
-//
-//     func webRTCClientDidGenerateIceCandidate(
-//         client: FancyWebRTC,
-//         iceCandidate: RTCIceCandidate
-//     )
-//
-//
-//     func webRTCClientOnIceCandidatesRemoved(
-//         client: FancyWebRTC,
-//         candidates: Array<RTCIceCandidate>
-//     )
-//
-//     func webRTCClientOnIceConnectionChange(
-//         client: FancyWebRTC,
-//         connectionState: RTCIceConnectionState
-//     )
-//
-//     func webRTCClientOnIceConnectionReceivingChange(
-//         client: FancyWebRTC,
-//         change: Bool
-//     )
-//
-//     func webRTCClientOnIceGatheringChange(
-//         client: FancyWebRTC,
-//         gatheringState: Any
-//     )
-//
-//     func webRTCClientOnSignalingChange(
-//         client: FancyWebRTC,
-//         signalingState: Any
-//     )
-//
-//     func webRTCClientOnCameraSwitchDone(
-//         client: FancyWebRTC,
-//         done:Bool
-//     )
-//
-//     func webRTCClientOnCameraSwitchError(
-//         client: FancyWebRTC,
-//         error: String
-//     )
-// }
-//
-// public class MediaData: NSObject {
-//     public var mediaSource: Any
-//     public var track: Any
-//     public var capturer: WebRTCCapturer?
-//     init(mediaSource: Any, track: Any, capturer: WebRTCCapturer?) {
-//         self.mediaSource = mediaSource;
-//         self.track = track;
-//         self.capturer = capturer;
-//     }
-// }
-//
+
+import Foundation
+import AVFoundation
+import WebRTC
+
+@objcMembers public class AVCaptureState: NSObject {
+    public static func isVideoDisabled() -> Bool {
+        let status = AVCaptureDevice.authorizationStatus(
+            for: AVMediaType.video
+        );
+        return (
+            status == AVAuthorizationStatus.denied ||
+                status == AVAuthorizationStatus.restricted
+        );
+    }
+
+    public static func isAudioDisabled() -> Bool {
+        let status = AVCaptureDevice.authorizationStatus(
+            for: AVMediaType.video
+        );
+        return (
+            status == AVAuthorizationStatus.denied ||
+                status == AVAuthorizationStatus.restricted
+        );
+    }
+}
+
+
+
+
+
+@objc public enum Quality: Int {
+    case MAX_480P
+    case MAX_720P
+    case MAX_1080P
+    case MAX_2160P
+    case HIGHEST
+    case LOWEST
+}
+
+@objc public enum WebRTCDataChannelMessageType: Int, RawRepresentable {
+    case BINARY
+    case TEXT
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .BINARY:
+            return "binary"
+        case .TEXT:
+            return "text"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "binary":
+            self = .BINARY
+        case "text":
+            self = .TEXT
+        default:
+            self = .TEXT
+
+        }
+    }
+}
+
+@objc public protocol WebRTCIceCandidate {
+    var sdpMid: String {get set}
+    var  sdpMLineIndex: Int {get set}
+    var  sdp: String {get set}
+}
+
+@objc  public protocol WebRTCSdp {
+    var type: WebRTCSdpType {get set}
+    var sdp: String {get set}
+}
+
+
+@objc public enum SignalingState: Int, RawRepresentable {
+    case STABLE
+    case HAVE_LOCAL_OFFER
+    case HAVE_LOCAL_PRANSWER
+    case HAVE_REMOTE_OFFER
+    case HAVE_REMOTE_PRANSWER
+    case CLOSED
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .STABLE:
+            return "stable"
+        case .HAVE_LOCAL_OFFER:
+            return "have-local-offer"
+        case .HAVE_LOCAL_PRANSWER:
+            return "have-local-pranswer"
+        case .HAVE_REMOTE_OFFER:
+            return "have-remote-offer"
+        case .HAVE_REMOTE_PRANSWER:
+            return "have-remote-pranswer"
+        case .CLOSED:
+            return "closed"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "stable":
+            self = .STABLE
+        case "have-local-offer":
+            self = .HAVE_LOCAL_OFFER
+        case "have-local-pranswer":
+            self = .HAVE_LOCAL_PRANSWER
+        case "have-remote-offer":
+            self = .HAVE_REMOTE_OFFER
+        case "have-remote-pranswer":
+            self = .HAVE_REMOTE_PRANSWER
+        case "closed":
+            self = .CLOSED
+        default:
+            self = .STABLE
+        }
+    }
+}
+
+@objc public enum IceGatheringState: Int, RawRepresentable {
+    case NEW
+    case GATHERING
+    case COMPLETE
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .NEW:
+            return "binary"
+        case .GATHERING:
+            return "text"
+        case .COMPLETE:
+            return "complete"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "new":
+            self = .NEW
+        case "gathering":
+            self = .GATHERING
+        case "complete":
+            self = .COMPLETE
+        default:
+            self = .COMPLETE
+
+        }
+    }
+}
+
+@objc public enum IceConnectionState: Int, RawRepresentable {
+    case NEW
+    case CHECKING
+    case CONNECTED
+    case COMPLETED
+    case FAILED
+    case DISCONNECTED
+    case CLOSED
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .NEW:
+            return "new"
+        case .CHECKING:
+            return "checking"
+        case .CONNECTED:
+            return "connected"
+        case .COMPLETED:
+            return "completed"
+        case .FAILED:
+            return "failed"
+        case .DISCONNECTED:
+            return "disconnected"
+        case .CLOSED:
+            return "closed"
+        default:
+            return "new"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "new":
+            self = .NEW
+        case "checking":
+            self = .CHECKING
+        case "connected":
+            self = .CONNECTED
+        case "completed":
+            self = .COMPLETED
+        case "failed":
+            self = .FAILED
+        case "disconnected":
+            self = .DISCONNECTED
+        case "closed":
+            self = .CLOSED
+        default:
+            self = .NEW
+        }
+    }
+}
+
+@objc public enum WebRTCDataChannelState: Int, RawRepresentable {
+    case CONNECTING
+    case CLOSED
+    case CLOSING
+    case OPEN
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .CONNECTING:
+            return "connecting"
+        case .CLOSED:
+            return "closed"
+        case .CLOSING:
+            return "closing"
+        case .OPEN:
+            return "open"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "connecting":
+            self = .CONNECTING
+        case "closed":
+            self = .CLOSED
+        case "closing":
+            self = .CLOSING
+        case "open":
+            self = .OPEN
+        default:
+            self = .CLOSED
+
+        }
+    }
+}
+
+@objcMembers public class IceServer: NSObject {
+    var username: String?
+    var password: String?
+    var urls: NSArray?
+    override init() {
+
+    }
+    public init(urls: NSArray, username: String?, password: String?) {
+        self.urls = urls
+        self.username = username
+        self.password = password
+    }
+}
+
+@objc public protocol WebRTCOptions {
+    var iceServers: Array<IceServer> {get set}
+    var enableVideo: Bool {get set}
+    var enableAudio: Bool {get set}
+}
+
+@objc public enum WebRTCState: Int {
+    case CONNECTING
+    case DISCONNECTED
+    case CONNECTED
+}
+
+@objc public enum WebRTCSdpType: Int, RawRepresentable {
+    case OFFER
+    case PRANSWER
+    case ANSWER
+    public typealias RawValue = String
+    public var rawValue: RawValue {
+        switch self {
+        case .OFFER:
+            return "offer"
+        case .PRANSWER:
+            return "prAnswer"
+        case .ANSWER:
+            return "answer"
+        }
+    }
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "offer":
+            self = .OFFER
+        case "prAnswer":
+            self = .PRANSWER
+        case "answer":
+            self = .ANSWER
+        default:
+            self = .OFFER
+
+        }
+    }
+}
+
+
+@objc public protocol FancyWebRTCClientDelegate {
+    func webRTCClientOnRemoveStream(client: FancyWebRTC, stream: RTCMediaStream)
+    func webRTCClientDataChannelStateChanged(
+        client: FancyWebRTC,
+        name: String,
+        type: Any
+    )
+    func webRTCClientDataChannelMessageType(
+        client: FancyWebRTC,
+        name: String,
+        data: String,
+        type: WebRTCDataChannelMessageType
+    )
+    func webRTCClientStartCallWithSdp(client: FancyWebRTC, sdp: RTCSessionDescription)
+
+    func webRTCClientDidReceiveStream(
+        client: FancyWebRTC,
+        stream: RTCMediaStream
+    )
+
+    func webRTCClientDidRemoveStream(
+        client: FancyWebRTC,
+        stream: RTCMediaStream
+    )
+
+    func webRTCClientDidReceiveError(client: FancyWebRTC, error: NSError)
+
+
+    func webRTCClientOnRenegotiationNeeded(
+        client: FancyWebRTC
+    )
+
+
+    func webRTCClientDidGenerateIceCandidate(
+        client: FancyWebRTC,
+        iceCandidate: RTCIceCandidate
+    )
+
+
+    func webRTCClientOnIceCandidatesRemoved(
+        client: FancyWebRTC,
+        candidates: Array<RTCIceCandidate>
+    )
+
+    func webRTCClientOnIceConnectionChange(
+        client: FancyWebRTC,
+        connectionState: RTCIceConnectionState
+    )
+
+    func webRTCClientOnIceConnectionReceivingChange(
+        client: FancyWebRTC,
+        change: Bool
+    )
+
+    func webRTCClientOnIceGatheringChange(
+        client: FancyWebRTC,
+        gatheringState: Any
+    )
+
+    func webRTCClientOnSignalingChange(
+        client: FancyWebRTC,
+        signalingState: Any
+    )
+
+    func webRTCClientOnCameraSwitchDone(
+        client: FancyWebRTC,
+        done:Bool
+    )
+
+    func webRTCClientOnCameraSwitchError(
+        client: FancyWebRTC,
+        error: String
+    )
+}
+
+public class MediaData: NSObject {
+    public var mediaSource: Any
+    public var track: Any
+    public var capturer: WebRTCCapturer?
+    init(mediaSource: Any, track: Any, capturer: WebRTCCapturer?) {
+        self.mediaSource = mediaSource;
+        self.track = track;
+        self.capturer = capturer;
+    }
+}
+
 //
 // @objcMembers public class FancyWebRTC: NSObject , RTCDataChannelDelegate, RTCPeerConnectionDelegate{
 //     var connection: RTCPeerConnection?

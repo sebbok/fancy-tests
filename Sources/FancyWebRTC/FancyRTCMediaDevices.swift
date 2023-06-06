@@ -40,9 +40,9 @@ public class FancyRTCMediaDevices: NSObject {
         
     }
 
-     @objc public static func stop() {
-            capturer!.stopCapture();
-        }
+    @objc func stop() {
+        capturer!.stopCapture();
+    }
     
     @objc public static func getUserMedia(constraints:FancyRTCMediaStreamConstraints,
                                           listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
