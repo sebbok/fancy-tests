@@ -219,6 +219,7 @@ public class FancyRTCMediaDevices: NSObject {
 
          let recorder = RPScreenRecorder.shared()
                 if (recorder.isRecording) {
+                 listener(nil,"-----------recorder.isRecording")
 
                     recorder.stopCapture { (error) in
                         if(error != nil){
