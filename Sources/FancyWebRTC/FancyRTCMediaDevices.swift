@@ -40,9 +40,9 @@ public class FancyRTCMediaDevices: NSObject {
         
     }
 
-    @objc func stop() {
-        capturer!.stopCapture();
-    }
+     @objc public static func stop() {
+            capturer!.stopCapture();
+        }
     
     @objc public static func getUserMedia(constraints:FancyRTCMediaStreamConstraints,
                                           listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
@@ -256,52 +256,53 @@ public class FancyRTCMediaDevices: NSObject {
     
     @objc public static func getDisplayMedia(constraints:FancyRTCMediaStreamConstraints,
                                              listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
-        
-         stop()
-//         if #available(iOS 11.0, *){
-//
-//             let factory = FancyRTCPeerConnection.factory
-//
-//             let localStream = factory.mediaStream(withStreamId: UUID().uuidString)
-//
-//
-//             if (!AVCaptureState.isAudioDisabled()) {
-//                 let audioTrackId = UUID().uuidString
-//                 let audioSource = factory.audioSource(with: RTCMediaConstraints.init(mandatoryConstraints: nil, optionalConstraints: nil))
-//                 let audioTrack = factory.audioTrack(with: audioSource, trackId: audioTrackId)
-//                 audioTrack.isEnabled = true
-//                 localStream.addAudioTrack(audioTrack)
-//                 if(AVCaptureState.isVideoDisabled()){
-//                     listener(FancyRTCMediaStream(mediaStream: localStream) ,nil)
-//                 }
-//             } else {
-//                 listener(nil,ErrorDomain.audioPermissionDenied.rawValue)
-//                 return
-//             }
-//
-//             let recorder = RPScreenRecorder.shared()
-//             if(recorder.isRecording){
-//                 recorder.stopCapture { (error) in
-//                     if(error == nil){
-//                      listener(nil,"-----------if(recorder.isRecording)")
-//                         doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
-//                           listener(nil,"-----------if(recorder.isRecording) after")
-//                     }else{
-//                         print("getDisplayMedia", error!.localizedDescription)
-//                     }
-//                 }
-//             }else if(recorder.isAvailable){
-//                 doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
-//                   listener(nil,"-----------if recorder.isAvailable")
-//             }else{
-//                 listener(nil,"Screen recorder is not available!")
-//                 return
-//             }
-//
-//         }else{
-//             listener(nil,"Screen recorder is not available!")
-//             return
-//         }
+
+//         let capturer = RTCCameraVideoCapturer.captureDevices()
+         let capturer = RTCCameraVideoCapturer(delegate: videoSource)
+        capturer.stopCapture
+        if #available(iOS 11.0, *){
+            let factory = FancyRTCPeerConnection.factory
+
+            let localStream = factory.mediaStream(withStreamId: UUID().uuidString)
+
+
+            if (!AVCaptureState.isAudioDisabled()) {
+                let audioTrackId = UUID().uuidString
+                let audioSource = factory.audioSource(with: RTCMediaConstraints.init(mandatoryConstraints: nil, optionalConstraints: nil))
+                let audioTrack = factory.audioTrack(with: audioSource, trackId: audioTrackId)
+                audioTrack.isEnabled = true
+                localStream.addAudioTrack(audioTrack)
+                if(AVCaptureState.isVideoDisabled()){
+                    listener(FancyRTCMediaStream(mediaStream: localStream) ,nil)
+                }
+            } else {
+                listener(nil,ErrorDomain.audioPermissionDenied.rawValue)
+                return
+            }
+
+            let recorder = RPScreenRecorder.shared()
+            if(recorder.isRecording){
+                recorder.stopCapture { (error) in
+                    if(error == nil){
+                     listener(nil,"-----------if(recorder.isRecording)")
+                        doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
+                          listener(nil,"-----------if(recorder.isRecording) after")
+                    }else{
+                        print("getDisplayMedia", error!.localizedDescription)
+                    }
+                }
+            }else if(recorder.isAvailable){
+                doStartRecording(recorder: recorder, factory: factory, localStream: localStream, listener: listener)
+                  listener(nil,"-----------if recorder.isAvailable")
+            }else{
+                listener(nil,"Screen recorder is not available!")
+                return
+            }
+
+        }else{
+            listener(nil,"Screen recorder is not available!")
+            return
+        }
         
         
     }
