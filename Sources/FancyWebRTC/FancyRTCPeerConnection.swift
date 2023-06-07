@@ -302,11 +302,11 @@ import WebRTC
         get{
             var list: Array<FancyRTCIceServer> = []
             let defaultIceServers = [
-                "stun:stun.l.google.com:19302",
-                "stun:stun1.l.google.com:19302",
-                "stun:stun2.l.google.com:19302",
-                "stun:stun3.l.google.com:19302",
-                "stun:stun4.l.google.com:19302"
+                "stun:74.125.142.127:19302",
+                                                         "stun:172.217.192.127:19302",
+                                                         "stun:142.250.15.127:19302",
+                                                         "stun:108.177.15.127:19302",
+                                                         "stun:108.177.119.127:19302"
             ]
             
             for server in defaultIceServers {
