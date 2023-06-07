@@ -255,7 +255,7 @@ public class FancyRTCMediaDevices: NSObject {
 
         let videoSource = factory.videoSource()
         let capturer = RTCVideoCapturer(delegate: videoSource)
-        capturer.stopCapture
+        capturer.stopCapture()
         if #available(iOS 11.0, *){
             let factory = FancyRTCPeerConnection.factory
 
