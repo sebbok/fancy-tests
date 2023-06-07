@@ -250,11 +250,11 @@ public class FancyRTCMediaDevices: NSObject {
         }
     }
     
-    @objc public static func getDisplayMedia(constraints:FancyRTCMediaStreamConstraints,
+    @objc public static func getDisplayMedia(constraints:FancyRTCMediaStreamConstraints,  factory: RTCPeerConnectionFactory,
                                              listener: @escaping (_ stream : FancyRTCMediaStream?, _ error : String?) -> ()){
 
-//         let capturer = RTCCameraVideoCapturer.captureDevices()
-         let capturer = RTCCameraVideoCapturer(delegate: videoSource)
+        let videoSource = factory.videoSource()
+        let capturer = RTCVideoCapturer(delegate: videoSource)
         capturer.stopCapture
         if #available(iOS 11.0, *){
             let factory = FancyRTCPeerConnection.factory
