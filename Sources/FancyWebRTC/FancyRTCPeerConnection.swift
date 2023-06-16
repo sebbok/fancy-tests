@@ -363,9 +363,9 @@ import WebRTC
     
     public func createOffer(mediaConstraints: FancyRTCMediaConstraints, listener: @escaping (FancyRTCSessionDescription?, String?) -> Void) {
         
-        
+
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "false"))){
-            mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
+            mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "false"))
         }
         
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "false"))){
@@ -376,6 +376,7 @@ import WebRTC
                 listener(nil,error?.localizedDescription)
             }else{
                 listener(FancyRTCSessionDescription(sdp: sdp!),nil)
+                      listener(nil,"-----------FancyRTCSessionDescription SDP READY")
             }
         }
     }
