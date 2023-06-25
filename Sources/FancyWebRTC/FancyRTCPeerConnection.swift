@@ -370,7 +370,7 @@ import WebRTC
             let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")
              let encoder = JSONEncoder()
                         do{
-                            let constraints = MediaConstraints(mandatory: self.mandatory, optional: self.optional)
+                            let constraints = test
                             let json = try encoder.encode(constraints)
                             let jsonString = String(data: json, encoding: .utf8) ?? ""
                              listener(nil, jsonString)
