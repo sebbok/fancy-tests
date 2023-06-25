@@ -361,16 +361,24 @@ import WebRTC
             }
         }
     }
+
     
     
     public func createOffer(mediaConstraints: FancyRTCMediaConstraints, listener: @escaping (FancyRTCSessionDescription?, String?) -> Void) {
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")) && !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "false"))){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
             let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")
-            let encodedData = try JSONEncoder().encode(test)
-            let jsonString = String(data: encodedData,
-                                    encoding: .utf8)
-              listener(nil, jsonString)
+             let encoder = JSONEncoder()
+                        do{
+                            let constraints = MediaConstraints(mandatory: self.mandatory, optional: self.optional)
+                            let json = try encoder.encode(constraints)
+                            let jsonString = String(data: json, encoding: .utf8) ?? ""
+                             listener(nil, jsonString)
+                        }catch{
+                            return ""
+                        }
+
+
         }
 
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "false"))){
