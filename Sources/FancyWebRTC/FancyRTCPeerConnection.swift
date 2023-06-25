@@ -364,7 +364,7 @@ import WebRTC
     
     
     public func createOffer(mediaConstraints: FancyRTCMediaConstraints, listener: @escaping (FancyRTCSessionDescription?, String?) -> Void) {
-        if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")) && !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "false"))){
+        if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo"))){
                 listener(nil,"-----------!mediaConstraints.mandatory.contains1")
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
                   listener(nil,"-----------!mediaConstraints.mandatory.contains2")
