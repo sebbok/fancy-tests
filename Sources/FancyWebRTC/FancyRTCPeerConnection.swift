@@ -375,7 +375,7 @@ import WebRTC
                             let jsonString = String(data: json, encoding: .utf8) ?? ""
                              listener(nil, jsonString)
                         }catch{
-                            return ""
+                            listener(nil, "-----error jsonString creating")
                         }
 
 
