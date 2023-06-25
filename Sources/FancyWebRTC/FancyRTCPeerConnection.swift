@@ -365,20 +365,19 @@ import WebRTC
     
     
     public func createOffer(mediaConstraints: FancyRTCMediaConstraints, listener: @escaping (FancyRTCSessionDescription?, String?) -> Void) {
+        let test = mediaConstraints
+                 let encoder = JSONEncoder()
+                            do{
+                                let constraints = test
+                                let json = try encoder.encode(constraints)
+                                let jsonString = String(data: json, encoding: .utf8) ?? ""
+                                 listener(nil, jsonString)
+                            }catch{
+                                listener(nil, "-----error jsonString creating")
+                            }
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))){
 //             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
             //let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")
-            let test = mediaConstraints.mandatory
-             let encoder = JSONEncoder()
-                        do{
-                            let constraints = test
-                            let json = try encoder.encode(constraints)
-                            let jsonString = String(data: json, encoding: .utf8) ?? ""
-                             listener(nil, jsonString)
-                        }catch{
-                            listener(nil, "-----error jsonString creating")
-                        }
-
 
         }
 
