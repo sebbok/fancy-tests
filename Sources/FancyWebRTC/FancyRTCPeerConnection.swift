@@ -371,7 +371,7 @@ import WebRTC
         }else{
         listener(nil,"-----------!mediaConstraints.mandatory.contains else")
         }
-         listener(nil,"-----------!mediaConstraints.mandatory.contains2")
+         listener(nil,"-----------!mediaConstraints.mandatory.contains3")
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "false"))){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true"))
         }
