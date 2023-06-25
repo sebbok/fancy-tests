@@ -367,7 +367,7 @@ import WebRTC
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")) && !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "false"))){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
             let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true")
-              listener(nil,"-----------!mediaConstraints.mandatory.contains1", test)
+              listener(nil, test)
         }
 
         if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "false"))){
