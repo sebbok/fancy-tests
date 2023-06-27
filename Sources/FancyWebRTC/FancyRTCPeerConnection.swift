@@ -374,17 +374,16 @@ import WebRTC
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true"))
         }
 
-
-//                 let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")
-//                          let encoder = JSONEncoder()
-//                                     do{
-//                                         let constraints = test
-//                                         let json = try encoder.encode(constraints)
-//                                         let jsonString = String(data: json, encoding: .utf8) ?? ""
-//                                          listener(nil, jsonString)
-//                                     }catch{
-//                                         listener(nil, "-----error jsonString creating")
-//                                     }
+                let test = mediaConstraints
+                         let encoder = JSONEncoder()
+                                    do{
+                                        let constraints = test
+                                        let json = try encoder.encode(constraints)
+                                        let jsonString = String(data: json, encoding: .utf8) ?? ""
+                                         listener(nil, jsonString)
+                                    }catch{
+                                        listener(nil, "-----error jsonString creating")
+                                    }
 
         _connection.offer(for: mediaConstraints.mediaConstraints) { (sdp, error) in
             if(error != nil){
