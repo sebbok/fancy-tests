@@ -375,6 +375,10 @@ import WebRTC
         }
 
 //                 let test = mediaConstraints
+
+if (mediaConstraints.mandatory.contains(where: {$0.key == "OfferToReceiveVideo"})){
+listener(nil, "-----!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+}
                 let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")
                          let encoder = JSONEncoder()
                                     do{
