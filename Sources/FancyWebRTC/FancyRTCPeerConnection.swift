@@ -366,29 +366,25 @@ import WebRTC
     
     public func createOffer(mediaConstraints: FancyRTCMediaConstraints, listener: @escaping (FancyRTCSessionDescription?, String?) -> Void) {
 
-        if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))){
+        if (!mediaConstraints.mandatory.contains(where: {$0.key == "OfferToReceiveVideo"})){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveVideo", value: "true"))
         }
 
-        if(!mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")) || !mediaConstraints.mandatory.contains(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "false"))){
+        if (!mediaConstraints.mandatory.contains(where: {$0.key == "OfferToReceiveAudio"})){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true"))
         }
 
-//                 let test = mediaConstraints
 
-if (mediaConstraints.mandatory.contains(where: {$0.key == "OfferToReceiveVideo"})){
-listener(nil, "-----!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-}
-                let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")
-                         let encoder = JSONEncoder()
-                                    do{
-                                        let constraints = test
-                                        let json = try encoder.encode(constraints)
-                                        let jsonString = String(data: json, encoding: .utf8) ?? ""
-                                         listener(nil, jsonString)
-                                    }catch{
-                                        listener(nil, "-----error jsonString creating")
-                                    }
+//                 let test = FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true")
+//                          let encoder = JSONEncoder()
+//                                     do{
+//                                         let constraints = test
+//                                         let json = try encoder.encode(constraints)
+//                                         let jsonString = String(data: json, encoding: .utf8) ?? ""
+//                                          listener(nil, jsonString)
+//                                     }catch{
+//                                         listener(nil, "-----error jsonString creating")
+//                                     }
 
         _connection.offer(for: mediaConstraints.mediaConstraints) { (sdp, error) in
             if(error != nil){
