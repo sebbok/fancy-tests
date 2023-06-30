@@ -302,7 +302,6 @@ import WebRTC
         get{
             var list: Array<FancyRTCIceServer> = []
             let defaultIceServers = [
-                "stun:74.125.142.127:19302",
                                                          "stun:172.217.192.127:19302",
                                                          "stun:142.250.15.127:19302",
                                                          "stun:108.177.15.127:19302",
@@ -373,17 +372,6 @@ import WebRTC
         if (!mediaConstraints.mandatory.contains(where: {$0.key == "OfferToReceiveAudio"})){
             mediaConstraints.mandatory.append(FancyRTCMediaConstraints.FancyRTCKeyValue(key: "OfferToReceiveAudio", value: "true"))
         }
-
-//                 let test = mediaConstraints
-//                          let encoder = JSONEncoder()
-//                                     do{
-//                                         let constraints = test
-//                                         let json = try encoder.encode(constraints)
-//                                         let jsonString = String(data: json, encoding: .utf8) ?? ""
-//                                          listener(nil, jsonString)
-//                                     }catch{
-//                                         listener(nil, "-----error jsonString creating")
-//                                     }
 
         _connection.offer(for: mediaConstraints.mediaConstraints) { (sdp, error) in
             if(error != nil){

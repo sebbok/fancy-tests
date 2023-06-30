@@ -400,7 +400,6 @@ public class MediaData: NSObject {
     var remoteStreams: Dictionary<String,Any>
     var dataChannels: Dictionary<String, RTCDataChannel>
     static let defaultIceServers = [
-        "stun:74.125.142.127:19302",
         "stun:172.217.192.127:19302",
         "stun:142.250.15.127:19302",
         "stun:108.177.15.127:19302",
