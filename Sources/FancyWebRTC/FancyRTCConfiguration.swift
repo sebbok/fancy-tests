@@ -107,14 +107,14 @@ import WebRTC
     public override init() {
         _configuration = RTCConfiguration()
         super.init()
-        let defaultIceServers = [
-                                         "stun:172.217.192.127:19302",
+        let defaultIceServers = [       "stun:172.217.192.127:19302",
                                          "stun:142.250.15.127:19302",
                                          "stun:108.177.15.127:19302",
                                          "stun:108.177.119.127:19302"]
-        for url in defaultIceServers {
-            configuration.iceServers.append(RTCIceServer(urlStrings: [url]))
-        }
+//         for url in defaultIceServers {
+//             configuration.iceServers.append(RTCIceServer(urlStrings: [url]))
+//         }
+        configuration.iceServers.append(RTCIceServer(urlStrings: ["stun:stun.relay.metered.ca:80"]))
         
         // configuration.enableDtlsSrtp = true;
         // configuration.enableRtpDataChannel = true;
