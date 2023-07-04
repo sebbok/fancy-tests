@@ -440,7 +440,7 @@ public class MediaData: NSObject {
 //             for server in defaultIceServers {
 //                 nativeIceServers.append(RTCIceServer(urlStrings: [server]))
 //             }
-             nativeIceServers.append(RTCIceServer(url: "stun:stun.relay.metered.ca:80"));
+             nativeIceServers.append(RTCIceServer(urlStrings: "stun:stun.relay.metered.ca:80"));
         }
         let rtc = FancyWebRTC()
         rtc.configuration?.iceServers = nativeIceServers
