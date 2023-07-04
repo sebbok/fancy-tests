@@ -308,9 +308,10 @@ import WebRTC
                                                          "stun:108.177.119.127:19302"
             ]
             
-            for server in defaultIceServers {
-                list.append(FancyRTCIceServer(url: server));
-            }
+//             for server in defaultIceServers {
+//                 list.append(FancyRTCIceServer(url: server));
+//             }
+              list.append(FancyRTCIceServer(url: "stun:stun.relay.metered.ca:80"));
             return list;
         }
     }
