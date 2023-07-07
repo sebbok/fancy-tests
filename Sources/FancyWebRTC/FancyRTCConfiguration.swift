@@ -111,10 +111,10 @@ import WebRTC
                                          "stun:142.250.15.127:19302",
                                          "stun:108.177.15.127:19302",
                                          "stun:108.177.119.127:19302"]
-//         for url in defaultIceServers {
-//             configuration.iceServers.append(RTCIceServer(urlStrings: [url]))
-//         }
-        configuration.iceServers.append(RTCIceServer(urlStrings: ["stun:stun.relay.metered.ca:80"]))
+        for url in defaultIceServers {
+            configuration.iceServers.append(RTCIceServer(urlStrings: [url]))
+        }
+//         configuration.iceServers.append(RTCIceServer(urlStrings: ["stun:stun.relay.metered.ca:80"]))
         
         // configuration.enableDtlsSrtp = true;
         // configuration.enableRtpDataChannel = true;
